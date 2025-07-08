@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 
 const navItems = [
-  { name: "Home", href: "/" },
+  { name: "Home", href: "/public" },
   { name: "About", href: "/public/about" },
   { name: "Contact", href: "/public/contact" },
   { name: "Products", href: "/public/products" },

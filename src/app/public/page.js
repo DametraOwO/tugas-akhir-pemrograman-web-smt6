@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from "react";
 import styles from "./page.module.css";
+import Header from "./Header";
 
 const sections = [
   {
@@ -148,17 +149,20 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className={styles.bg} style={{ minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
-      {sections.map((section, idx) => (
-        <section
-          key={section.id}
-          ref={el => (sectionRefs.current[idx] = el)}
-          className={styles.section}
-          style={{ zIndex: 10 - idx }}
-        >
-          {section.content}
-        </section>
-      ))}
-    </div>
+    <>
+      <Header active="Home" />
+      <div className={styles.bg} style={{ minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
+        {sections.map((section, idx) => (
+          <section
+            key={section.id}
+            ref={el => (sectionRefs.current[idx] = el)}
+            className={styles.section}
+            style={{ zIndex: 10 - idx }}
+          >
+            {section.content}
+          </section>
+        ))}
+      </div>
+    </>
   );
 } 

@@ -2,6 +2,8 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./public/page.module.css";
 import Header from "./public/Header";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const sections = [
   {
@@ -127,42 +129,57 @@ const sections = [
   },
 ];
 
-export default function HomePage() {
-  const sectionRefs = useRef([]);
+export default function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      sectionRefs.current.forEach((ref, idx) => {
-        if (!ref) return;
-        const rect = ref.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        if (rect.top < windowHeight * 0.7 && rect.bottom > windowHeight * 0.2) {
-          ref.classList.add(styles.visible);
-        } else {
-          ref.classList.remove(styles.visible);
-        }
-      });
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    // Dummy login, ganti dengan API/database nanti
+    if (username === "admin" && password === "admin") {
+      router.push("/admin/home");
+    } else {
+      setError("Username atau password salah");
+    }
+  };
 
   return (
-    <>
-      <Header active="Home" />
-      <div className={styles.bg} style={{ minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
-        {sections.map((section, idx) => (
-          <section
-            key={section.id}
-            ref={el => (sectionRefs.current[idx] = el)}
-            className={styles.section}
-            style={{ zIndex: 10 - idx }}
-          >
-            {section.content}
-          </section>
-        ))}
-      </div>
-    </>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+      <form onSubmit={handleLogin} style={{ background: "#fff", borderRadius: 8, boxShadow: "0 2px 12px #0001", padding: 32, minWidth: 320, maxWidth: 350 }}>
+        <h2 style={{ margin: 0, fontWeight: 700 }}>Login</h2>
+        <div style={{ color: '#888', fontSize: 14, marginBottom: 18 }}>Masukkan username dan password untuk login</div>
+        <button type="button" onClick={() => router.push("/public")} style={{ width: "100%", marginBottom: 18, background: "#fff", color: "#ff7f2a", border: "1px solid #ff7f2a", borderRadius: 4, padding: 10, fontWeight: 600, cursor: "pointer" }}>
+          Masuk Ke Halaman Utama
+        </button>
+        <div style={{ marginBottom: 12 }}>
+          <label style={{ fontWeight: 500, fontSize: 15 }}>Username</label>
+          <input
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            style={{ width: "100%", padding: 12, borderRadius: 4, border: "1px solid #ddd", marginTop: 4, fontSize: 15, boxSizing: 'border-box' }}
+            autoComplete="username"
+          />
+        </div>
+        <div style={{ marginBottom: 18 }}>
+          <label style={{ fontWeight: 500, fontSize: 15 }}>Password</label>
+          <input
+            type="password"
+            placeholder="********"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            style={{ width: "100%", padding: 12, borderRadius: 4, border: "1px solid #ddd", marginTop: 4, fontSize: 15, boxSizing: 'border-box' }}
+            autoComplete="current-password"
+          />
+        </div>
+        {error && <div style={{ color: "#e74c3c", marginBottom: 12, fontSize: 14 }}>{error}</div>}
+        <button type="submit" style={{ width: "100%", background: "#ff7f2a", color: "#fff", border: "none", borderRadius: 4, padding: 12, fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
+          Sign in
+        </button>
+      </form>
+    </div>
   );
 } 
