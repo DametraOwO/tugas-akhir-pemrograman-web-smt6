@@ -1,6 +1,7 @@
 'use client';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getProducts, deleteProduct } from "../../../utils/indexedDB";
 
 const sidebarItems = [
   { name: "Home", icon: "🏠", href: "/admin/home" },
@@ -10,14 +11,23 @@ const sidebarItems = [
 
 export default function AdminProduk() {
   const router = useRouter();
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
       if (!isLoggedIn) {
         router.replace('/admin/login');
       }
+      getProducts().then(setProducts);
     }
   }, [router]);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Yakin ingin menghapus produk ini?')) {
+      await deleteProduct(id);
+      setProducts(await getProducts());
+    }
+  };
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#fafbfc' }}>
       {/* Sidebar */}
@@ -82,12 +92,22 @@ export default function AdminProduk() {
               </tr>
             </thead>
             <tbody>
-              {/* Data produk akan di-render di sini nanti */}
+              {products.length === 0 ? (
+                <tr><td colSpan={4} style={{ color: '#aaa', textAlign: 'center', padding: 24 }}>Belum ada produk ditambahkan</td></tr>
+              ) : (
+                products.map((p) => (
+                  <tr key={p.id}>
+                    <td>{p.nama}</td>
+                    <td>{p.harga}</td>
+                    <td>{p.createdAt ? new Date(p.createdAt).toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-'}</td>
+                    <td>
+                      <button onClick={() => router.push(`/admin/produk/edit?id=${p.id}`)} style={{ marginRight: 8, background: '#ff7f2a', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 10px', cursor: 'pointer' }}>Edit</button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
-          <div style={{ color: '#aaa', textAlign: 'center', marginTop: 32, fontSize: 15 }}>
-            Belum ada produk ditambahkan
-          </div>
         </div>
       </main>
       {/* Profile Icon & Sign Out */}

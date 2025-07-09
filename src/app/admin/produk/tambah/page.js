@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { addProduct } from "../../../../utils/indexedDB";
 
 const sidebarItems = [
   { name: "Home", icon: "🏠", href: "/admin/home" },
@@ -24,10 +25,26 @@ export default function TambahProduk() {
   const [deskripsi, setDeskripsi] = useState("");
   const [gambar, setGambar] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Integrasi database di sini
-    alert('Produk berhasil disimpan (dummy)');
+    let gambarBase64 = null;
+    if (gambar) {
+      gambarBase64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(gambar);
+      });
+    }
+    const produkBaru = {
+      nama,
+      harga,
+      linkShopee,
+      deskripsi,
+      gambar: gambarBase64,
+      createdAt: new Date().toISOString(),
+    };
+    await addProduct(produkBaru);
     router.push('/admin/produk');
   };
 
