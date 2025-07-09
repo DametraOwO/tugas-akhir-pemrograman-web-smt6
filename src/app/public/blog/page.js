@@ -3,9 +3,11 @@ import Header from "../Header";
 import styles from "../page.module.css";
 import { useEffect, useState } from "react";
 import { getBlogs } from "../../../utils/indexedDB";
+import { useRouter } from "next/navigation";
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
+  const router = useRouter();
   useEffect(() => {
     getBlogs().then((data) => {
       // Urutkan terbaru di depan
@@ -43,7 +45,7 @@ export default function BlogPage() {
                     oleh Admin<br />
                     {b.createdAt ? new Date(b.createdAt).toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) : '-'}
                   </div>
-                  <button style={{ background: '#a86b3c', color: '#fff', border: 'none', borderRadius: 5, padding: '8px 16px', fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>
+                  <button onClick={() => router.push(`/public/blog/${b.id}`)} style={{ background: '#a86b3c', color: '#fff', border: 'none', borderRadius: 5, padding: '8px 16px', fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>
                     Lihat Selengkapnya
                   </button>
                 </div>
