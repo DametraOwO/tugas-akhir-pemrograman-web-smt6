@@ -20,6 +20,7 @@ export default function EditProduk() {
   const [deskripsi, setDeskripsi] = useState("");
   const [gambar, setGambar] = useState(null);
   const [gambarPreview, setGambarPreview] = useState(null);
+  const [createdAt, setCreatedAt] = useState("");
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -36,6 +37,7 @@ export default function EditProduk() {
           setLinkShopee(produk.linkShopee || "");
           setDeskripsi(produk.deskripsi || "");
           setGambarPreview(produk.gambar || null);
+          setCreatedAt(produk.createdAt || "");
         }
       });
     }
@@ -59,6 +61,7 @@ export default function EditProduk() {
       linkShopee,
       deskripsi,
       gambar: gambarBase64,
+      createdAt: createdAt || new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
     await updateProduct(produkBaru);

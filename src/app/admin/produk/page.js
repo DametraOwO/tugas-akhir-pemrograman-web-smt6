@@ -98,7 +98,7 @@ export default function AdminProduk() {
                 products.map((p) => (
                   <tr key={p.id}>
                     <td>{p.nama}</td>
-                    <td>{p.harga}</td>
+                    <td>{p.harga ? `Rp. ${Number(p.harga).toLocaleString('id-ID')}` : '-'}</td>
                     <td>{p.createdAt ? new Date(p.createdAt).toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-'}</td>
                     <td>
                       <button onClick={() => router.push(`/admin/produk/edit?id=${p.id}`)} style={{ marginRight: 8, background: '#ff7f2a', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 10px', cursor: 'pointer' }}>Edit</button>
