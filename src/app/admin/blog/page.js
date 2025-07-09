@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getBlogs, deleteBlog } from "../../../utils/indexedDB";
+import { getBlogs, deleteBlog, seedDummyBlogs } from "../../../utils/indexedDB";
 
 const sidebarItems = [
   { name: "Home", icon: "🏠", href: "/admin/home" },

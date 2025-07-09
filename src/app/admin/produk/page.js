@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getProducts, deleteProduct } from "../../../utils/indexedDB";
+import { getProducts, deleteProduct, seedDummyProducts } from "../../../utils/indexedDB";
 
 const sidebarItems = [
   { name: "Home", icon: "🏠", href: "/admin/home" },
@@ -13,14 +13,8 @@ export default function AdminProduk() {
   const router = useRouter();
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
-      if (!isLoggedIn) {
-        router.replace('/admin/login');
-      }
-      getProducts().then(setProducts);
-    }
-  }, [router]);
+    seedDummyProducts().then(() => getProducts().then(setProducts));
+  }, []);
 
   const handleDelete = async (id) => {
     if (window.confirm('Yakin ingin menghapus produk ini?')) {
