@@ -15,6 +15,7 @@
   font-size: 1.3rem;
   color: #a86b3c;
   letter-spacing: 0.15em;
+  text-decoration: none; /* pastikan tidak ada underline pada link logo */
 }
 
 .nav {

@@ -14,7 +14,7 @@ const navItems = [
 export default function Header({ active }) {
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>Tumbuh Lestari</div>
+      <Link href="/" className={styles.logo}>Tumbuh Lestari</Link>
       <nav className={styles.nav}>
         {navItems.map((item) => (
           <Link

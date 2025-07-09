@@ -1,5 +1,5 @@
 'use client';
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const sidebarItems = [
@@ -10,14 +10,39 @@ const sidebarItems = [
 
 export default function AdminBlog() {
   const router = useRouter();
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+      if (!isLoggedIn) {
+        router.replace('/admin/login');
+      }
+    }
+  }, [router]);
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#fafbfc' }}>
       {/* Sidebar */}
       <aside style={{ width: 220, background: '#fff', borderRight: '1px solid #eee', padding: 0 }}>
-        <div style={{ fontWeight: 700, fontSize: 20, padding: '24px 0 18px 24px', letterSpacing: 1, color: '#222', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <button
+          onClick={() => router.push('/public')}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            margin: 0,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            fontWeight: 700,
+            fontSize: 20,
+            color: '#222',
+            letterSpacing: 1,
+            marginBottom: 16 // tambahkan gap bawah
+          }}
+        >
           <span style={{ color: '#a86b3c', fontWeight: 900, fontSize: 22 }}>TL</span>
           Tumbuh Lestari
-        </div>
+        </button>
         <nav style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {sidebarItems.map(item => (
             <button

@@ -135,10 +135,20 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+      if (isLoggedIn) {
+        router.replace('/admin/home');
+      }
+    }
+  }, [router]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     // Dummy login, ganti dengan API/database nanti
     if (username === "admin" && password === "admin") {
+      localStorage.setItem('isAdminLoggedIn', 'true');
       router.push("/admin/home");
     } else {
       setError("Username atau password salah");
