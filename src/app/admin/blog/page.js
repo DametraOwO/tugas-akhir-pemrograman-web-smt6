@@ -1,6 +1,7 @@
 'use client';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getBlogs, deleteBlog } from "../../../utils/indexedDB";
 
 const sidebarItems = [
   { name: "Home", icon: "🏠", href: "/admin/home" },
@@ -10,14 +11,24 @@ const sidebarItems = [
 
 export default function AdminBlog() {
   const router = useRouter();
+  const [blogs, setBlogs] = useState([]);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
       if (!isLoggedIn) {
         router.replace('/admin/login');
       }
+      getBlogs().then(setBlogs);
     }
   }, [router]);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Yakin ingin menghapus postingan ini?')) {
+      await deleteBlog(id);
+      setBlogs(await getBlogs());
+    }
+  };
+
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#fafbfc' }}>
       {/* Sidebar */}
@@ -81,12 +92,21 @@ export default function AdminBlog() {
               </tr>
             </thead>
             <tbody>
-              {/* Data postingan akan di-render di sini nanti */}
+              {blogs.length === 0 ? (
+                <tr><td colSpan={3} style={{ color: '#aaa', textAlign: 'center', padding: 24 }}>Belum ada postingan ditambahkan</td></tr>
+              ) : (
+                blogs.map((b) => (
+                  <tr key={b.id}>
+                    <td>{b.judul}</td>
+                    <td>{b.createdAt ? new Date(b.createdAt).toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-'}</td>
+                    <td>
+                      <button onClick={() => handleDelete(b.id)} style={{ background: '#fff', color: '#e74c3c', border: '1px solid #e74c3c', borderRadius: 4, padding: '4px 10px', cursor: 'pointer' }}>Hapus</button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
-          <div style={{ color: '#aaa', textAlign: 'center', marginTop: 32, fontSize: 15 }}>
-            Belum ada postingan ditambahkan
-          </div>
         </div>
       </main>
       {/* Profile Icon & Sign Out */}

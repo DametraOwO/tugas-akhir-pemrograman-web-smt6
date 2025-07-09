@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { addBlog } from "../../../../utils/indexedDB";
 
 const sidebarItems = [
   { name: "Home", icon: "🏠", href: "/admin/home" },
@@ -22,10 +23,24 @@ export default function TambahPostingan() {
   const [konten, setKonten] = useState("");
   const [gambar, setGambar] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Integrasi database di sini
-    alert('Postingan berhasil disimpan (dummy)');
+    let gambarBase64 = null;
+    if (gambar) {
+      gambarBase64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(gambar);
+      });
+    }
+    const blogBaru = {
+      judul,
+      konten,
+      gambar: gambarBase64,
+      createdAt: new Date().toISOString(),
+    };
+    await addBlog(blogBaru);
     router.push('/admin/blog');
   };
 
