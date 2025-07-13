@@ -85,21 +85,22 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      sectionRefs.current.forEach((ref, idx) => {
-        if (!ref) return;
-        const rect = ref.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        if (rect.top < windowHeight * 0.7 && rect.bottom > windowHeight * 0.2) {
-          ref.classList.add(styles.visible);
-        } else {
-          ref.classList.remove(styles.visible);
-        }
-      });
+    // Fade-in on scroll for all main sections
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated', 'fadeIn');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section) => observer.observe(section));
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
     };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleExploreClick = () => {

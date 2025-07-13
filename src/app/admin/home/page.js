@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { getProducts, getBlogs } from "../../../utils/indexedDB";
 
 const sidebarItems = [
   { name: "Home", icon: "🏠", href: "/admin/home" },
@@ -11,6 +12,8 @@ const sidebarItems = [
 export default function AdminHome() {
   const router = useRouter();
   const [showSignOut, setShowSignOut] = useState(false);
+  const [productCount, setProductCount] = useState(0);
+  const [blogCount, setBlogCount] = useState(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -18,6 +21,8 @@ export default function AdminHome() {
       if (!isLoggedIn) {
         router.replace('/admin/login');
       }
+      getProducts().then((products) => setProductCount(products.length));
+      getBlogs().then((blogs) => setBlogCount(blogs.length));
     }
   }, [router]);
 
@@ -73,13 +78,13 @@ export default function AdminHome() {
           {/* Card Produk */}
           <div onClick={() => router.push('/admin/produk')} style={{ flex: 1, background: '#fff', borderRadius: 12, boxShadow: '0 1px 6px #0001', padding: 24, cursor: 'pointer', border: '1px solid #eee', transition: 'box-shadow 0.2s' }}>
             <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 8 }}>Produk <span style={{ float: 'right', fontSize: 20 }}>📦</span></div>
-            <div style={{ fontWeight: 700, fontSize: 32, color: '#222' }}>2</div>
+            <div style={{ fontWeight: 700, fontSize: 32, color: '#222' }}>{productCount}</div>
             <div style={{ color: '#888', fontSize: 14 }}>Total produk yang telah ditambahkan</div>
           </div>
           {/* Card Blog */}
           <div onClick={() => router.push('/admin/blog')} style={{ flex: 1, background: '#fff', borderRadius: 12, boxShadow: '0 1px 6px #0001', padding: 24, cursor: 'pointer', border: '1px solid #eee', transition: 'box-shadow 0.2s' }}>
             <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 8 }}>Blog <span style={{ float: 'right', fontSize: 20 }}>📄</span></div>
-            <div style={{ fontWeight: 700, fontSize: 32, color: '#222' }}>3</div>
+            <div style={{ fontWeight: 700, fontSize: 32, color: '#222' }}>{blogCount}</div>
             <div style={{ color: '#888', fontSize: 14 }}>Total postingan blog yang telah dibuat</div>
           </div>
         </div>

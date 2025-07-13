@@ -12,6 +12,13 @@ const sidebarItems = [
 export default function AdminBlog() {
   const router = useRouter();
   const [blogs, setBlogs] = useState([]);
+  const [showSignOut, setShowSignOut] = useState(false);
+  const handleSignOut = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('isAdminLoggedIn');
+    }
+    router.push("/");
+  };
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
@@ -113,9 +120,18 @@ export default function AdminBlog() {
       <div style={{ position: 'absolute', top: 18, right: 32, display: 'flex', alignItems: 'center', gap: 8, flexDirection: 'row-reverse' }}>
         <span
           style={{ fontSize: 26, color: '#222', background: '#f5f5f5', borderRadius: '50%', padding: 6, border: '1px solid #eee', cursor: 'pointer' }}
+          onClick={() => setShowSignOut(v => !v)}
         >
           👤
         </span>
+        {showSignOut && (
+          <button
+            onClick={handleSignOut}
+            style={{ background: '#fff', color: '#ff7f2a', border: '1px solid #ff7f2a', borderRadius: 4, padding: '8px 18px', fontWeight: 600, cursor: 'pointer', fontSize: 15 }}
+          >
+            Sign out
+          </button>
+        )}
       </div>
     </div>
   );
