@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useRef } from "react";
 import styles from "./page.module.css";
-import Header from "./Header";
 
 const sections = [
   {
@@ -95,36 +94,6 @@ const sections = [
       </>
     ),
   },
-  {
-    id: 5,
-    content: (
-      <>
-        <div className={styles.sectionContent}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem', marginBottom: '2rem' }}>
-            <div>
-              <div style={{ color: '#fff', fontWeight: 700 }}>Quick</div>
-              <div style={{ color: '#fff' }}>Home<br/>About<br/>Contact<br/>Products<br/>Blog</div>
-            </div>
-            <div>
-              <div style={{ color: '#fff', fontWeight: 700 }}>Connect with</div>
-              <div style={{ color: '#fff' }}>tumbuhlestaritalks@gmail.com<br/>+62 838 3203 3996</div>
-            </div>
-            <div>
-              <div style={{ color: '#fff', fontWeight: 700 }}>Kerja Sama</div>
-              <div style={{ color: '#fff' }}>Gudang Madala Haji<br/>Petani Milenial Sukarame</div>
-            </div>
-            <div>
-              <div style={{ color: '#fff', fontWeight: 700 }}>Subscribe now</div>
-              <div style={{ color: '#fff' }}>IG FB</div>
-            </div>
-          </div>
-          <div style={{ color: '#fff', textAlign: 'center', marginTop: '2rem' }}>
-            Copyright © 2024 Tumbuh Lestari
-          </div>
-        </div>
-      </>
-    ),
-  },
 ];
 
 export default function HomePage() {
@@ -149,20 +118,17 @@ export default function HomePage() {
   }, []);
 
   return (
-    <>
-      <Header active="Home" />
-      <div className={styles.bg} style={{ minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
-        {sections.map((section, idx) => (
-          <section
-            key={section.id}
-            ref={el => (sectionRefs.current[idx] = el)}
-            className={styles.section}
-            style={{ zIndex: 10 - idx }}
-          >
-            {section.content}
-          </section>
-        ))}
-      </div>
-    </>
+    <div className={styles.bg} style={{ minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
+      {sections.slice(0, 4).map((section, idx) => (
+        <section
+          key={section.id}
+          ref={el => (sectionRefs.current[idx] = el)}
+          className={styles.section}
+          style={{ zIndex: 10 - idx }}
+        >
+          {section.content}
+        </section>
+      ))}
+    </div>
   );
 } 

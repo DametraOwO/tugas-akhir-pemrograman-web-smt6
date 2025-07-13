@@ -1,0 +1,113 @@
+.footerWrapper {
+  background: #a86b3c;
+  position: relative;
+  color: #fff;
+  padding: 0;
+  margin-top: 0;
+}
+
+.waveTop {
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  position: relative;
+  background: none;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  position: relative;
+  padding: 2.5rem 2rem 1.5rem 2rem;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.footerTitle {
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+}
+
+/* Tambahkan style agar link di Quick vertikal */
+.footerQuickLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.footerLink {
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.footerLink:hover {
+  color: #d2a074;
+}
+.footerText {
+  color: #fff;
+  margin-bottom: 0.3rem;
+  font-size: 0.97rem;
+}
+.footerSocials {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.2rem;
+}
+.socialIcon {
+  background: #fff;
+  color: #a86b3c;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.socialIcon:hover {
+  background: #d2a074;
+  color: #fff;
+  text-decoration: none;
+}
+
+.copyright {
+  text-align: center;
+  color: #a86b3c;
+  background: #f3e0d0;
+  padding: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .footerContent {
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+  }
+} 
