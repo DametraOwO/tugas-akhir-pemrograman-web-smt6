@@ -33,4 +33,538 @@
 
 .bg {
   background: #d2a074;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70vh;
+  padding: 2.5rem 2.5rem 1.5rem 2.5rem;
+  box-sizing: border-box;
+  gap: 2.5rem;
+}
+.heroLeft {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 260px;
+}
+.heroTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #a86b3c;
+  margin-bottom: 0.2em;
+  line-height: 1.1;
+}
+.heroTitle span {
+  color: #fff;
+  font-weight: 700;
+}
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: #a86b3c;
+  font-weight: 500;
+  margin-bottom: 2.2em;
+  margin-top: 0.5em;
+}
+.heroButton {
+  background: #a86b3c;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: background 0.2s;
+}
+.heroButton:hover {
+  background: #d2a074;
+  color: #a86b3c;
+}
+.heroRight {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.heroImage {
+  max-width: 340px;
+  width: 100%;
+  height: auto;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px #0002;
+  background: #fff;
+}
+.heroSubtitleWhite {
+  color: #fff;
+}
+.heroSubtitleBrown {
+  color: #a86b3c;
+}
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1rem 1rem 1rem;
+    gap: 1.5rem;
+  }
+  .heroRight {
+    justify-content: center;
+    width: 100%;
+  }
+  .heroImage {
+    max-width: 260px;
+  }
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+}
+
+.aboutSection {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  background: #e2b991;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='16' cy='16' rx='6' ry='12' fill='%23d2a074' fill-opacity='0.25'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  border-radius: 0.7rem;
+  margin: 10rem 0 2.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+.aboutSection::before {
+  content: "";
+  position: absolute;
+  top: -32px;
+  left: 0;
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(to bottom, #d2a074 0%, rgba(226,185,145,0.7) 100%);
+  border-top-left-radius: 0.7rem;
+  border-top-right-radius: 0.7rem;
+  z-index: 2;
+}
+.aboutSection::after {
+  content: "";
+  position: absolute;
+  bottom: -32px;
+  left: 0;
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(to top, #d2a074 0%, rgba(226,185,145,0.7) 100%);
+  border-bottom-left-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem;
+  z-index: 2;
+}
+.aboutImageWrap {
+  flex: 1.1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.aboutImage {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 4px 24px #0002;
+}
+.aboutContent {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 1.5rem;
+}
+.aboutTitle {
+  color: #a86b3c;
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.aboutHeadline {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.7rem;
+}
+.aboutHeadline span {
+  color: #a86b3c;
+}
+.aboutDesc {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+.aboutStats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 1.2rem;
+}
+.aboutStat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.aboutStatValue {
+  color: #a86b3c;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  border-bottom: 2px solid #a86b3c;
+  width: fit-content;
+}
+.aboutStatLabel {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+}
+@media (max-width: 900px) {
+  .aboutSection {
+    flex-direction: column;
+    padding: 1.5rem 0.7rem;
+    gap: 1.5rem;
+  }
+  .aboutContent {
+    padding-left: 0;
+  }
+  .aboutImage {
+    max-width: 100%;
+  }
+  .aboutHeadline {
+    font-size: 1.3rem;
+  }
+}
+
+.processSection {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 5rem 0 3rem 0;
+  position: relative;
+  z-index: 1;
+}
+.processCard {
+  background: #cfa06a;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 24px #0001;
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 420px;
+  position: relative;
+  padding: 3.5rem 3.5rem 3.5rem 3.5rem;
+  gap: 3.5rem;
+}
+.processLeft {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.processStep {
+  color: #a86b3c;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.processStepDesc {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.processDivider {
+  width: 2px;
+  background: #e2b991;
+  border-radius: 2px;
+  margin: 0 2.5rem;
+  min-height: 220px;
+  align-self: stretch;
+}
+.processRight {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+.processTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.7rem;
+}
+.processTitle span {
+  color: #a86b3c;
+  font-weight: 700;
+}
+.processDesc {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+  max-width: 420px;
+}
+.processDesc span {
+  color: #a86b3c;
+  font-weight: 500;
+}
+.processBeans {
+  position: absolute;
+  top: -48px;
+  right: 32px;
+  z-index: 3;
+  width: 110px;
+  height: 60px;
+  pointer-events: none;
+}
+.processCardShadow {
+  position: absolute;
+  left: 30px;
+  right: 0;
+  bottom: -24px;
+  height: 32px;
+  background: #b98a5a;
+  border-radius: 1.2rem;
+  filter: blur(2px);
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .processCard {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 0.7rem;
+  }
+  .processDivider {
+    display: none;
+  }
+  .processBeans {
+    right: 10px;
+    top: -32px;
+    width: 70px;
+    height: 40px;
+  }
+  .processCardShadow {
+    left: 10px;
+    height: 18px;
+  }
+} 
+
+.offerSection {
+  margin: 5rem 0 3rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.offerHeader {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  gap: 0.7rem;
+  text-align: center;
+}
+.offerTitle {
+  font-size: 2.7rem;
+  font-weight: 700;
+  color: #a86b3c;
+  margin-bottom: 0.5rem;
+}
+.offerTitle span {
+  color: #fff;
+}
+.offerSubtitle {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+.offerButton {
+  background: #a86b3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 1.5rem;
+  margin-top: 0.7rem;
+  display: inline-block;
+}
+.offerButton:hover {
+  background: #fff;
+  color: #a86b3c;
+}
+.offerGrid {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.offerCard {
+  background: transparent;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 240px;
+  max-width: 270px;
+  flex: 1 1 240px;
+  box-shadow: none;
+  padding: 0 0 1.5rem 0;
+}
+.offerImageWrap {
+  width: 180px;
+  height: 180px;
+  background: #fff;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 12px #0001;
+}
+.offerImage {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 0.7rem;
+}
+.offerName {
+  color: #a86b3c;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+.offerProcess {
+  color: #a86b3c;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+.offerDesc {
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0.9;
+}
+@media (max-width: 900px) {
+  .offerHeader, .offerGrid {
+    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+  .offerGrid {
+    flex-direction: row;
+    gap: 1.2rem;
+  }
+} 
+
+.heroAbout {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: #d2a074;
+}
+.heroAboutBg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.heroAboutOverlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 70vw;
+  height: 100vh;
+  background: #e2b991;
+  clip-path: ellipse(65vw 60vh at 0% 0%);
+  z-index: 2;
+}
+.heroAboutContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4.5rem 2.5rem 2.5rem 3.5rem;
+  min-width: 350px;
+  max-width: 600px;
+  height: 100%;
+}
+.heroAboutTitle {
+  font-size: 2.7rem;
+  font-weight: 700;
+  color: #a86b3c;
+  margin-bottom: 0.5rem;
+}
+.heroAboutTitle span {
+  color: #fff;
+}
+.heroAboutSubtitle {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 2.2rem;
+  margin-top: 0.5em;
+  max-width: 420px;
+}
+.heroAboutButton {
+  background: #a86b3c;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: background 0.2s;
+}
+.heroAboutButton:hover {
+  background: #fff;
+  color: #a86b3c;
+}
+@media (max-width: 900px) {
+  .heroAboutContent {
+    padding: 2.5rem 1rem 1.5rem 1.2rem;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .heroAboutOverlay {
+    width: 100vw;
+    border-bottom-right-radius: 100vw 100%;
+    border-top-right-radius: 100vw 100%;
+  }
+  .heroAboutTitle {
+    font-size: 1.7rem;
+  }
 } 
