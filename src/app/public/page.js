@@ -207,6 +207,27 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      {/* Team Section */}
+      <section className={styles.teamSection}>
+        <div className={styles.teamTitle}><span>Kebersamaan</span> dalam <span className={styles.teamTitleBrown}>Keberhasilan</span></div>
+        <div className={styles.teamRow}>
+          <div className={styles.teamCard}>
+            <Image src="/images/ppl1.jpg" alt="Dega" width={160} height={160} className={styles.teamImg} />
+            <div className={styles.teamName}>Dega</div>
+            <div className={styles.teamRole}>Head & Quality Control</div>
+          </div>
+          <div className={styles.teamCard}>
+            <Image src="/images/ppl2.png" alt="Megananda" width={160} height={160} className={styles.teamImg} />
+            <div className={styles.teamName}>Megananda</div>
+            <div className={styles.teamRole}>Social Media Manager</div>
+          </div>
+          <div className={styles.teamCard}>
+            <Image src="/images/ppl3.JPG" alt="Putra" width={160} height={160} className={styles.teamImg} />
+            <div className={styles.teamName}>Putra</div>
+            <div className={styles.teamRole}>Field Management</div>
+          </div>
+        </div>
+      </section>
       {/* Section lain */}
       {sections.slice(3, 4).map((section, idx) => (
         <section
